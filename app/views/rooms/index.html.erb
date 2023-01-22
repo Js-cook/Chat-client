@@ -1,0 +1,9 @@
+<h1>Chat Client</h1>
+<div id="rooms-list">
+  <ul>
+    <% @rooms.each do |room| %>
+<!--       <li><%= room.name %></li> -->
+      <li><%= link_to(room.name, room_path(room)) %></li>
+    <% end %>
+  </ul>
+</div>
