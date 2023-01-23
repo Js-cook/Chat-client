@@ -1,4 +1,11 @@
 <h1>Chat Client</h1>
+<div>
+  <% if session[:user_id] != nil %>
+    <p><%= @logged_user %></p>
+  <% else %>
+    <p>Not logged in</p>
+  <% end %>
+</div>
 <div id="rooms-list">
   <ul>
     <% @rooms.each do |room| %>
