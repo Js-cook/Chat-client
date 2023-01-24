@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(params.permit(:content, :user, :room))
+    data = params.permit(:content, :user, :room)
+    @message = Message.new(content: data[:content], user: User.find(data[:user]), room: Room.find(data[:room]))
     if @message.save
       # Broadcast to channel
       puts "my nuts"

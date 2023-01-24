@@ -6,15 +6,17 @@
   
 </div>
 <div id="message-form">
-  <input id="message-content" type="text" placeholder="Enter a message...">
-  <input type="submit" value="Send">
+  <form>
+    <input id="message-content" type="text" placeholder="Enter a message...">
+    <input type="submit" value="Send">
+  </form>
 </div>
 
 <script>
   const form = document.querySelector("#message-form")
   form.addEventListener("submit", (e) => {
     e.preventDefault()
-    fetch("/messages/create", {
+    fetch("https://chat-client.jacobcook4.repl.co/messages/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,9 +24,10 @@
       },
       body: JSON.stringify({
         content: document.querySelector("#message-content").value,
-        room: document.querySelector("#room-id").innerHTML,
-        user: document.querySelector("#logged-user").innerHTML
+        room: parseInt(document.querySelector("#room-id").innerHTML),
+        user: parseInt(document.querySelector("#logged-user").innerHTML)
       })
     })
+    document.querySelector("message-content").value = ""
   })
 </script>
