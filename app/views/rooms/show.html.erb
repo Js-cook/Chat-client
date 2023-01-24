@@ -1,10 +1,30 @@
 <h1><%= @room.name %></h1>
 <p><i><%= @room.description %></i></p>
-<p><%= @logged_user.username %></p>
+<p id="logged-user"><%= @logged_user.id %></p>
+<p id="room-id"><%= @room.id %></p>
 <div id="messages-block">
   
 </div>
 <div id="message-form">
-  <input type="text" placeholder="Enter a message...">
+  <input id="message-content" type="text" placeholder="Enter a message...">
   <input type="submit" value="Send">
 </div>
+
+<script>
+  const form = document.querySelector("#message-form")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    fetch("/messages/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": document.querySelector("meta[name=csrf-token]").content
+      },
+      body: JSON.stringify({
+        content: document.querySelector("#message-content").value,
+        room: document.querySelector("#room-id").innerHTML,
+        user: document.querySelector("#logged-user").innerHTML
+      })
+    })
+  })
+</script>
