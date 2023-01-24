@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages, only: [:new, :create, :delete]
   # FIX LATER
   get 'user/index'
   get 'user/show'

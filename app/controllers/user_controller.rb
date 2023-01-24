@@ -7,9 +7,12 @@ class UserController < ApplicationController
   end
 
   def new
+    @user = User.new
   end
 
   def create
+    @user = User.new(params.permit(:username, :password))
+    @user.save ? redirect_to({controller: "rooms", action: "index"}) : render("new")
   end
 
   def login
