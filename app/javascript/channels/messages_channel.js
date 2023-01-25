@@ -13,7 +13,10 @@ if (document.querySelector("#messages-block") != null) {
     received(data) {
       // Called when there's incoming data on the websocket for this channel
       document.querySelector("#messages-block").innerHTML += `
-        <h3>${data}</h3>
+        <div>
+          <h4>${data['user']}</h4>
+          <p>${data['content']}</p>
+        </div>
       `
     }
   });
