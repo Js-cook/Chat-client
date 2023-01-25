@@ -1,9 +1,14 @@
 <h1>Chat Client</h1>
 <div>
-  <% if session[:user_id] != nil %>
-    <p><%= @logged_user %></p>
+  <% if session[:user_id] == nil %>
+    <%= link_to("Login", {controller: "user", action: "login"}) %>
   <% else %>
-    <p>Not logged in</p>
+    <%= link_to("Logout", {controller: "user", action: "logout"}) %>
+  <% end %>
+</div>
+<div>
+  <% if session[:user_id] == nil %>
+    <p>Attention! You are not logged in, login to enter a chatroom.</p>
   <% end %>
 </div>
 <div id="rooms-list">
