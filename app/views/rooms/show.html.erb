@@ -3,6 +3,12 @@
 <p id="logged-user"><%= @logged_user.id %></p>
 <p id="room-id"><%= @room.id %></p>
 <div id="messages-block">
+  <% @room.messages.each do |m| %>
+    <div id="message">
+      <h4><%= m.user %></h4>
+      <p><%= m.content %></p>
+    </div>
+  <% end %>
   
 </div>
 <div id="message-form">
