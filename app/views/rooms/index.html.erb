@@ -1,21 +1,37 @@
-<h1>Chat Client</h1>
-<div>
+<div id="navbar">
+  <h1 id="title">Chat Client</h1>
   <% if session[:user_id] == nil %>
-    <%= link_to("Login", {controller: "user", action: "login"}) %>
+    <%= link_to controller: "user", action: "login" do %>
+      <div class="log-btn">
+        <h4>Login</h4>
+      </div>
+    <% end %>
   <% else %>
-    <%= link_to("Logout", {controller: "user", action: "logout"}) %>
+    <%= link_to controller: "user", action: "logout" do %>
+      <div class="log-btn">
+        <h4>Logout</h4>
+      </div>
+    <% end %>
   <% end %>
 </div>
+      
 <div>
+
+  <%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
+  
   <% if session[:user_id] == nil %>
     <p>Attention! You are not logged in, login to enter a chatroom.</p>
   <% end %>
 </div>
-<div id="rooms-list">
-  <ul>
+<div id="rooms-list-container">
+  <ul id="rooms-list">
     <% @rooms.each do |room| %>
-<!--       <li><%= room.name %></li> -->
-      <li><%= link_to(room.name, room_path(room)) %></li>
+      <%= link_to room_path(room) do %>
+        <li id="room-card">
+          <h3><%= room.name %></h3>
+          <p><%= room.description %></p>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
